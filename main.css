@@ -1,0 +1,500 @@
+/*
+@media (min-width: 1400px) {
+
+.overview {
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+    top: -300px;
+    width: 100%;
+    height: 300px;
+    background-color: white;
+    z-index: 9998;
+    box-sizing: border-box;
+    padding: 75px 10% 2% 10%;
+}
+    
+.thumbnail {
+    cursor: pointer;
+    position: relative;
+    width: calc(600px / 3);
+
+    height: 158px;
+    display: block;
+    float: left;
+    margin: 15px;
+    overflow: hidden;
+}
+  
+}
+*/
+
+@media (max-width: 1440px) {
+    
+.overview {
+    overflow: hidden;
+    position: absolute;
+    top: -500px;
+    width: 100%;
+    height: 500px;
+    background-color: white;
+    z-index: 9998;
+    box-sizing: border-box;
+    padding: 75px 10% 2% 10%;
+}
+
+.thumbnail {
+    cursor: pointer;
+    position: relative;
+    width: calc(600px / 3);
+    height: 158px;
+    display: block;
+    float: left;
+    margin: 15px;
+    overflow: hidden;
+}
+
+}
+
+body {
+    margin: 0;
+    font-family: UniversLTStd-Light;
+}
+
+#whole-page {
+    display: none;
+}
+
+#loading {
+    position: absolute;
+    z-index: 99999999;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+/*add whatever you want the loading screen to be here*/
+    background-color: red;
+}
+
+.gradient {
+    opacity: .4;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+
+#connor {
+    position: absolute;
+    font-size: 14pt;
+    z-index: 999997;
+    left: 50px;
+    top: 1%;
+}
+
+.connor-info-toggle,
+.overview-toggle,
+.project-details-toggle {
+    cursor: pointer;
+}
+
+.connor-info {
+    position: absolute;
+    left: -500;
+    top: 0;
+    width: 500px;
+    height: 100%;
+    background-color: white;
+    z-index: 9998;
+}
+
+.connor-info .connor-info-toggle p {
+    margin-left: 50px;
+    margin-top: 80px;
+    padding-right: 50px;
+}
+
+.connor-info .connor-info-toggle {
+    position: absolute;
+	top: 12px;
+	right: 10px;
+}
+
+#tops {
+    position: absolute;
+    text-align: center;
+    font-size: 10pt;
+    margin: 0 auto;
+    top: 5%;
+    left: 50%;
+    right: 50%;
+    z-index: 9999;
+}
+
+/*
+.overview {
+    overflow: hidden;
+    position: absolute;
+    top: -500px;
+    width: 100%;
+    height: 500px;
+    background-color: white;
+    z-index: 9998;
+    box-sizing: border-box;
+    padding: 75px 10% 2% 10%;
+}
+*/
+
+.overview .overview-toggle {
+    position: absolute;
+	top: 12px;
+	right: 10px;
+}
+
+/*
+.thumbnail {
+    cursor: pointer;
+    position: relative;
+    width: calc(600px / 3);
+    display: block;
+    float: left;
+    margin: 15px;
+    overflow: hidden;
+}
+*/
+
+.thumbnail-text {
+    position: absolute;
+    display: none; 
+}
+
+.thumbnail:hover .thumbnail-text {
+    display:block;
+}
+
+/*Beginning to look at large text overtop of the thumbnails*/
+
+.thumbnail .thumbnail-text {
+    font-size: 96px;
+    color: black;
+    position: absolute;
+    z-index: 99999;
+    left: 50%;
+    top: 50px;
+}
+
+.thumbnail {
+    overflow: visible;
+}
+
+/*transparent overlay*/
+
+.thumbnail:hover:after {
+    opacity:1;
+}
+
+.thumbnail:after {
+    content:'\A';
+    position:absolute;
+    width:100%; height:100%;
+    top:0; left:0;
+    background:rgba(0,0,0,0.25);
+/*Should I transition this???*/
+    opacity:0;
+}
+
+.project-label {
+    position: absolute;
+/*How do I make this just be one line of text???*/
+    width: 100%;
+    text-align: center;
+    bottom: 2%;
+    z-index: 9998;
+}
+
+/*
+.hide-details {
+    display: none;
+}
+
+.close {
+    display: block;
+    position: absolute;
+    font-size: 24px;
+    cursor: pointer;
+    width: 150px;
+    left: 50%;
+    bottom: 2%;
+    left: 45%;
+    z-index: 999999;
+}
+*/
+
+#bottoms {
+    position: relative;
+    font-size: 10pt;
+}
+
+.project-details {
+    position: fixed;
+    bottom: -300px;
+    width: 100%;
+    height: 300px;
+/*    border-top: 1px solid #000;*/
+    background-color: white;
+    z-index: 9998;
+    box-sizing: border-box;
+}
+
+.project-details .project-details-toggle p {
+    font-size: 14px;
+    line-height: 18px;
+    position: absolute;
+    width: 70%;
+	top: 12px;
+	right: 50px;  
+}
+
+.project-details .project-details-toggle h1 {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+    position: absolute;
+    width: 70%;
+	top: 12px;
+	left: 50px;  
+}
+
+.r {
+    display: none;
+	background-color: red;
+	opacity: .5;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 8%;
+	min-width: 110px;
+	height: 100%;
+    z-index: 999;
+}
+
+.l {
+    display: none;
+	background-color: red;
+	opacity: .5;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 8%;
+	min-width: 110px;
+	height: 100%;
+    z-index: 999;
+}
+
+.t {
+    display: none;
+	background-color: red;
+	opacity: .5;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	min-height: 50px;
+	height: 8%;
+    z-index: 999;
+}
+
+.b {
+    display: none;
+	background-color: red;
+	opacity: .5;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	min-height: 50px;
+	height: 8%;
+    z-index: 999;
+}
+
+.normal {
+	position: absolute;
+	right: 50px;
+	top: 50%;
+	margin-top: -5px;
+}
+
+/*USED TO TEST THE SLIDE LEFT*/
+
+/*
+#move {
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;  
+}
+
+.image {
+    position: absolute;
+    width: 50%;
+    height: 300px;
+    line-height: 300px;
+    font-size: 50px;
+    text-align: center;
+    border: 2px solid black;
+    left: 50%;
+    top: 100px;
+    margin-left: -25%;
+}
+
+#box1 {
+    background-color: green;
+    left: -150%;
+    overflow:hidden;
+}
+
+#box2 {
+    background-color: yellow;
+    overflow:hidden;
+}
+
+#box3 {
+    background-color: red;
+    left: 150%;
+    overflow:hidden;
+}
+*/
+
+
+/*USED FOR THE REGULAR CENTER AND SCALE OF IMAGES*/
+
+
+.curr {
+/*
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow:hidden;
+    top: 0;
+    left: 0;
+*/
+}
+
+.image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    margin-left: -50%;
+    left: -150%;
+    top: 0;
+}
+
+.images {
+    position: relative;
+    width: auto;
+    height: 100%;
+    display: block;
+    margin: 0 auto 1em;
+}
+
+.images:last-child {
+    margin-bottom: 0;
+}
+
+#move {
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; 
+}
+
+#box1 {
+    left: 50%;
+    background-color: azure;
+}
+
+#box2 {
+    background-color: beige;
+}
+
+#box3 {
+    background-color: tan;
+}
+
+#box4 {
+    background-color: aquamarine;
+}
+
+#box5 {
+    background-color:aqua;
+}
+
+
+
+/*
+article img {
+    max-width: 80%;
+    margin: auto;
+}
+*/
+
+.scroll {
+    cursor: row-resize;
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    overflow: scroll;
+    height: 80%;
+}
+
+#limit-t {
+    cursor: n-resize;
+	display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 50%;
+    background-color: rgb(0,188,255);
+}
+
+#limit-r {
+    cursor: e-resize;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 40%;
+    height: 100%;
+/*    background-color: rgb(0,230,0);*/
+    z-index: 9997;
+}
+
+#limit-b {
+    cursor: s-resize;
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50%;
+    background-color: rgb(0,0,0);
+}
+
+#limit-l {
+    cursor: w-resize;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 40%;
+    height: 100%;
+/*    background-color: rgb(255,45,0);*/
+    z-index: 9997;
+}
