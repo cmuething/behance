@@ -1,9 +1,236 @@
-<!DOCTYPE html>
 <html>
-<body>
-<h1 class="temp"><a href="https://www.behance.net/connormuething">N E W   S I T E</a><br>C O M I N G   S O O N !</h1>
-<style>
-    .temp { font-family: Helvetica; font-size: 16px; margin-top: 50px; margin-left: 50px; line-height: 24px;} 
-</style>    
-</body>
+
+  <head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Connor Muething</title>
+
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href='http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+      
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:thin|Open+Sans">
+      
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+      
+<!--    <base target="_blank">-->
+
+  </head>
+
+  <body>
+
+    <div id="loading"></div>
+
+    <div id="whole-page">
+
+    <div id="limit-r"></div>
+
+    <div id="limit-l"></div>
+        
+<!--PERSONAL INFO-->
+        
+<section class="connor-info">
+    
+        <script id="myname" type="text/x-mustache-template">
+            {{#user}}
+                <article>
+                    <p class="description">{{sections.About Me}}</p>
+                    <div class="experience">
+                        <ul>
+                    {{#user.links}}
+                            <li><a target="_blank" href="{{url}}">{{title}}</a></li>   
+                    {{/user.links}}
+                        </ul>
+                    </div>
+                    <div class="social-media">
+                    {{#user.social_links}}
+                        <a target="_blank" class="{{service_name}}" href="{{url}}"><i id="icon"></i></a>
+                    {{/user.social_links}}
+                    </div>
+                    <p class="contact"><a href="mailto:{{sections.Contact}}">{{sections.Contact}}</a></p>
+                </article>
+            {{/user}}
+        </script>
+
+    </section>
+
+    <p class="connor-info-toggle" id="connor" title="Connor Muething"> Connor<br>Muething </p>
+
+<!--OVERVIEW-->
+
+        <div class="thumbnail-icon">
+            <p class="overview-toggle" id="tops"><i class="fa fa-th-large"></i></p>
+        </div>
+
+        <section class="overview">
+          <script id="thumbnail-card" type="text/x-mustache-template">
+            {{#projects}}
+              <div class="thumbnail" id="b{{id}}">
+                <a class="wrapping" href="#{{id}}" data-project-id="{{id}}">
+                  <p class="thumbnail-text">{{name}}</p>
+                  <div class="thumbnail-image">
+                    <img src="{{covers.202}}" alt="{{name}}" />
+                  </div>
+                </a>
+              </div>
+            {{/projects}}
+          </script> 
+       </section>
+
+<!--PROJECT DETAILS-->
+
+        <section class="project-details" id="menu">
+            
+            <h1 class="project-name">Name/Title to be inserted</h1>
+            <p class="project-description">Description to be dynamically inserted as well</p>
+            
+        </section>
+
+        <div class="project-label">
+            <h1 class="project-name">Name/Title to be inserted</h1>
+        </div>
+
+<!--PROJECT PAGES-->
+
+        <div class="test"> </div>
+
+        <div id="full-projects">
+
+            <div class="delete">
+                <div class="no_api"><a target="_blank" href="https://www.behance.net/connormuething" class="too-much">Come back later!</a></div>
+                <div class="background"></div>
+            </div>
+            
+        </div>
+
+            <script id="project-item" type="text/x-mustache-template">
+                {{#project.id}}
+                <div class="project-item" id="project-{{project.id}}"> 
+                {{#project.name}}<h1 class="project-name">{{project.name}}</h1>{{/project.name}}
+        {{#project.description}}<p class="project-description">{{project.description}}</p>{{/project.description}}
+                
+                <section class="module">    
+                    <article class="scroll">
+                            {{#project.modules}}
+                            {{#embed}}<div class="embed-wrapper">{{{embed}}}</div>{{/embed}}
+              {{^embed}}
+                                <img id="image" class="{{type}}" src="{{#sizes.max_1200}}{{sizes.max_1200}}{{/sizes.max_1200}}{{^sizes.max_1200}}{{sizes.original}}{{/sizes.max_1200}}
+               " />              {{/embed}}
+
+                            {{/project.modules}}
+                    </article>
+                </div>
+                </section>
+                {{/project.id}}
+            </script>
+
+    </div>
+
+        <!-- JS -->
+        <script language="javascript" type="text/javascript" src="js/jquery-1.11.3.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script src="js/behance.js"></script>
+        <script src="js/mustache.min.js"></script>
+
+        <script>
+
+//COMPILING EVERYTHING
+
+        var initialUrl = 'https://api.behance.net/v2/users/' + userName + '/projects/?api_key=' + apiKey +'&per_page=8&callback=?';
+      var userUrl = 'https://api.behance.net/v2/users/' + userName + '/?api_key=' + apiKey +'&callback=?';
+            
+        $.getJSON(userUrl, function(data) {
+                var template = $('#myname').html();
+                var info = Mustache.to_html(template, data);
+                $('.connor-info').html(info);
+            });
+
+        $.getJSON(initialUrl, function(data) {
+
+        //mustache for projects
+        //this prints the project thumbnails
+        $('.delete').hide();
+
+        var template = $('#thumbnail-card').html();
+        var info = Mustache.to_html(template, data);
+        $('.overview').html(info);
+
+        // create an array of all the project IDs
+        var idArray  = [];
+        $('.thumbnail a').each(function() {
+          var projectID  = $(this).attr('data-project-id');
+          idArray.push(projectID);
+        });
+        console.log(idArray);
+            
+        var thumbNum = $('.thumbnail').length;
+        var urlArray = []
+        for (var i = 0; i < thumbNum; i++) {
+          var projectUrl = 'https://api.behance.net/v2/projects/' + idArray[i] + '/?api_key=' + apiKey +'&callback=?';
+          urlArray.push(projectUrl);
+        };
+        console.log(urlArray);
+
+        for (var j = 0; j < thumbNum; j++) {
+          var projectUrl = urlArray[j]
+          $.getJSON(projectUrl, function(data) {
+            // print out project by project images
+            var template = $('#project-item').html();
+            var info = Mustache.to_html(template, data);
+            $('#full-projects').append(info);
+            $('.project-item').first().addClass('curr');
+              
+            var projectname = $('.curr h1').html();
+            var projectdesc = $('.curr p').html();
+
+            $('.project-details .project-name').html(projectname);
+            $('.project-label .project-name').html(projectname);
+            $('.project-details .project-description').html(projectdesc);
+                           
+          });
+        };
+
+
+        // this should allow for making a project active
+        $('.thumbnail a').click(function() {
+          var projectID  = $(this).attr('data-project-id');
+          var findThis = '#project-' + projectID;
+          var overviewTop = $('.overview');
+          var gradientMove = $('.test');
+          
+          console.log(findThis);
+          $('.project-item').removeClass('curr');
+          $(findThis).addClass('curr');
+
+          var projectname = $('.curr h1').html();
+          var projectdesc = $('.curr p').html();
+
+          $('.project-details .project-name').html(projectname);
+          $('.project-label .project-name').html(projectname);
+          $('.project-details .project-description').html(projectdesc);
+
+	      overviewTop.animate({
+		    	top: "-600px"
+	    	}, 250);
+        
+          gradientMove.toggleClass('gradient');
+    
+        });
+        
+        $('.connor-info-toggle').click(function () {
+            
+        $('.linkedin #icon').addClass("fa fa-linkedin-square");
+        $('.instagram #icon').addClass("fa fa-instagram");
+        $('.tumblr #icon').addClass("fa fa-tumblr-square");
+            
+        });
+            
+    });
+            
+        </script>
+
+  </body>
+
 </html>

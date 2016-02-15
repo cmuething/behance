@@ -1,36 +1,3 @@
-//$('#limit-l').click(function () {
-//    $('.image').each(function () {
-//        if ($(this).offset().left < 0) {
-//            $(this).css("left", "150%");
-//        } else if ($(this).offset().left > $('#move').width()) {
-//            $(this).animate({
-//                left: '0'
-//            }, 500);
-//        } else {
-//            $(this).animate({
-//                left: '-150%'
-//            }, 500);
-//        }
-//    });
-//});
-//
-//$('#limit-r').click(function () {
-//    $('.image').each(function () {
-//        if ($(this).offset().left < 0) {
-//            $(this).animate({
-//                left: '0'
-//            }, 500);
-//        } else if ($(this).offset().left > $('#move').width()) {
-//            $(this).css("left", "-150%");
-//        } else {
-//            $(this).animate({
-//                left: '150%'
-//            }, 500);
-//        }
-//    });
-//});
-
-
 			$("#limit-l").click(function() {
 				console.log("Left");
 				var obj = $(".curr");
@@ -38,20 +5,19 @@
 					left: '-50%'
 				}, 500, function() {
 					$(this).css('left', '+150%');
-    				$(this).appendTo('#container');
+    				$(this).appendTo('#full-projects');
 				});
-                var newTitle = $(obj).next().attr('data-drawer-title');
-                var newDesc = $(obj).next().attr('data-drawer-description');
-                console.log(newTitle);
+                var newTitle = $(obj).next().find('h1').html();
+                var newDesc = $(obj).next().find('p').html();                
 				$(obj).next().animate({
 					left: '+50%'
 				}, 500, function() {
 					$(this).addClass('curr');
 					$(obj).removeClass('curr');
 				});
-                $('#bottoms').html(newTitle);
-                $('.project-details-toggle h1').html(newTitle);
-                $('.project-details-toggle p').html(newDesc);
+                $('.project-label .project-name').html(newTitle);
+                $('.project-details .project-name').html(newTitle);
+                $('.project-details .project-description').html(newDesc);
 			});
 
 			$("#limit-r").click(function() {
@@ -61,10 +27,10 @@
 				$(obj).animate({
 					left: '+150%'
 				}, 500, function() {
-					$(prox).prependTo('#container');
+					$(prox).prependTo('#full-projects');
 				});
-                var newTitle = $(prox).attr('data-drawer-title');
-                var newDesc = $(prox).attr('data-drawer-description');
+                var newTitle = $(prox).find('h1').html();
+                var newDesc = $(prox).find('p').html();
 				$(prox).css('left', '-50%');
 				$(prox).animate({
 					left: '+50%'
@@ -72,24 +38,22 @@
 					$(this).addClass('curr');
 					$(obj).removeClass('curr');
 				});
-                $('#bottoms').html(newTitle);
-                $('.project-details-toggle h1').html(newTitle);
-                $('.project-details-toggle p').html(newDesc);
+                $('.project-label .project-name').html(newTitle);
+                $('.project-details .project-name').html(newTitle);
+                $('.project-details .project-description').html(newDesc);
 			});
 
-//Am I going to have to use this to enable swipe left swipe right on mobile???
+//BUTTONS
 
-//			var hammertime = new Hammer( document.getElementById("container") );
-//			hammertime.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL });
-//			hammertime.on('swipeleft', function() {
-//				$("#esq").trigger("click");
-//			});
-//			hammertime.on('swiperight', function() {
-//				$("#dir").trigger("click");
-//			});
-//		});
-
-//What is the script of changing the href and linking the thumbnails going to say?? click on a thumbnail to add the class curr to the project box with the corresponding href
+$(document).ready(function(){
+    var gradientButton = $('.overview-toggle, .project-label, .connor-info-toggle');
+    var gradientMove = $('.test');
+    
+    gradientButton.click(function() {       
+        gradientMove.toggleClass('gradient');
+                
+    });
+});
 
 //INFO
 
@@ -100,34 +64,31 @@ $(document).ready(function () {
         var connorTitle = $('.connor-info-toggle');
     	var connorInfo = $('.connor-info');
     	var connorInfoWidth = $('.connor-info').width();
-        var gradientMove = $('.test');
+        var gradientMove = $('.test'); 
+        var myName = $('#connor');
     	    	
 	    	connorInfo.animate({
-		    	left: "0px",
-                zIndex: "999999"
-	    	});
-        
-            connorTitle.animate({
-                zIndex: "999999" 
-            }, 250);	
-        
-            gradientMove.addClass('gradient');
+		    	left: "0px"
+	    	});	
+            
+            myName.addClass('keep-name');
     });
-});
     
-    $(document).ready(function () {
     $('.test').on('click', function(event){
         event.preventDefault();
 
     	var connorInfo = $('.connor-info');
         var gradientMove = $('.test');
+    	var connorInfoWidth = $('.connor-info').width();
+        var myName = $('#connor');
         
 	    	connorInfo.animate({
-		    	left: "-500px"
+		    	left: "-800px"
 	    	}, 250);
         
-        gradientMove.removeClass('gradient');
+            gradientMove.removeClass('gradient');
         
+            myName.removeClass('keep-name');
     });
 });
 
@@ -139,84 +100,75 @@ $(document).ready(function () {
     	// create menu variables
     	var overviewTop = $('.overview');
     	var overviewTopHeight = $('.overview').height();
+        var gradientMove = $('.test');
+        
+        var myName = $('#connor');
     	    	
 	    	overviewTop.animate({
-		    	top: "0px",
-                zIndex: "999999"
-	    	}, 250);		
+		    	top: "0px"
+	    	}, 250);
+                
+            myName.addClass('keep-name');
+        
     });
-});
-    
-    $(document).ready(function () {
+
     $('.test').on('click', function(event){
         event.preventDefault();
 
     	var overviewTop = $('.overview');
         var gradientMove = $('.test');
+    	var overviewTopHeight = $('.overview').height();
         
+        var myName = $('#connor');
+
 	    	overviewTop.animate({
-		    	top: "-600px"
+		    	top: "-800px"
 	    	}, 250);
         
-        gradientMove.toggleClass('gradient');
+            gradientMove.removeClass('gradient');
         
+            myName.removeClass('keep-name');        
     });
 });
 
 //PROJECT DETAILS
 
-//Testing an idea for opening and closing the drawers without toggling a class but rather changing the z-index and using the gradient as the button
-
-//Could use the hide-details to change the name to an X but might just use the gradient as the button an upload a custom cursor
-
 $(document).ready(function () {
     $('.project-label').on('click', function(event){
     	event.preventDefault();
     	// create menu variables
-//        var projectClose = $('.hide-details');
         var projectTitle = $('.project-label');
     	var projectBottom = $('.project-details');
     	var projectBottomHeight = $('.project-details').height();
         
-	   projectBottom.animate({
-                zIndex: "999999",
-		    	bottom: "0px"
-	    	}, 250);	
+        var myName = $('#connor');
         
-//        projectTitle.toggleClass("hide-details");
-//        projectClose.toggleClass("close");
+           projectBottom.animate({
+                    bottom: "0px"
+                }, 250);
+        
+            myName.addClass('keep-name');
         
     	}); 
-    });
 
-
-$(document).ready(function () {
     $('.test').on('click', function(event){
         event.preventDefault();
 
-//        var projectClose = $('.hide-details');
     	var projectBottom = $('.project-details');
+    	var projectBottomHeight = $('.project-details').height();
         var gradientMove = $('.test');
+                
+        var myName = $('#connor');
         
-//        projectClose.toggleClass("close");
-
         projectBottom.animate({
-		    	bottom: "-300px"
+		    	bottom: "-800px"
 	    	}, 250);
         
-        gradientMove.toggleClass('gradient');
+        gradientMove.removeClass('gradient');
         
+        myName.removeClass('keep-name'); 
     });
 });   
-
-//$('#menu').bind('clickoutside', function (event) {
-//    var projectBottom = $('.project-details');
-//    
-//    projectBottom.animate({
-//        bottom: "-300px"
-//    });
-//    
-//});
 
 //GRADIENT
 
@@ -260,7 +212,7 @@ var g2 = Math.round(istep * c1_0[1] + step * c1_1[1]);
 var b2 = Math.round(istep * c1_0[2] + step * c1_1[2]);
 var color2 = "rgb("+r2+","+g2+","+b2+")";
 
- $('.gradient').css({
+ $('.gradient, .no_api').css({
    background: "-webkit-gradient(linear, left top, right top, from("+color1+"), to("+color2+"))"}).css({
     background: "-moz-linear-gradient(left, "+color1+" 0%, "+color2+" 100%)"});
   
@@ -280,22 +232,6 @@ var color2 = "rgb("+r2+","+g2+","+b2+")";
 }
 
 setInterval(updateGradient,10);
-
-//BUTTONS
-
-$(document).ready(function(){
-    var gradientButton = $('.overview-toggle, .project-label');
-    var gradientMove = $('.test');
-    
-    gradientButton.click(function() {       
-        gradientMove.toggleClass('gradient');
-        
-        gradientMove.animate({
-                zIndex: "999998",
-	    	});	
-                
-    });
-});
 
 //LOADING SCREEN 
 
@@ -319,15 +255,25 @@ onReady(function () {
     show('loading', false);
 });
 
-//CLOSE OVERVIEW TEST
+//RETURN .scroll TO THE TOP
 
-//$(document).ready(function(){
-//    var open = $('fa-the-large');
-//    var button = $('fa');
+$(document).ready(function () {
+
+$('.overview-toggle').click(function () {
+        $(".scroll").animate({
+            scrollTop: 0
+        }, 600);
+        return false;
+});
+});
+
+//STYLING THE SOCIAL MEDIA LINKS
+
+//$(document).ready(function () {
 //    
-//    open.click(function() {
-//        button.toggleClass('fa-times');
-//    });
+//    $('.linkedin #icon').addClass("fa-linkedin-square");
+//    $('.instagram #icon').addClass("fa-instagram");
+//    $('.tumblr #icon').addClass("fa-tumblr-square");
+//    
 //});
-   
     
