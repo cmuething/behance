@@ -151,7 +151,7 @@
 
         //mustache for projects
         //this prints the project thumbnails
-        $('.delete').hide();
+        $('.delete').remove();
 
         var template = $('#thumbnail-card').html();
         var info = Mustache.to_html(template, data);
