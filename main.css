@@ -538,6 +538,10 @@ body {
         top: 12px;
         left: 0;
     }
+    
+    .connor-info-toggle {
+        pointer-events: none;
+    }
 
     .connor-info {
         position: absolute;
