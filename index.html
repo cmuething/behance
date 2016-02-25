@@ -209,6 +209,7 @@
           var findThis = '#project-' + projectID;
           var overviewTop = $('.overview');
           var gradientMove = $('.test');
+          var myName = $('#connor');
           
           console.log(findThis);
           $('.project-item').removeClass('curr');
@@ -226,6 +227,8 @@
 	    	}, 250);
         
           gradientMove.toggleClass('gradient');
+            
+          myName.removeClass('keep-name');
     
         });
         
